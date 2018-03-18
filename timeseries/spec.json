@@ -1,0 +1,113 @@
+{
+  "$schema": "https://vega.github.io/schema/vega/v3.0.json",
+  "height": 400,
+  "padding": 5,
+  "width": 700,
+
+  "data": [
+    {
+      "name": "table",
+      "url": "data.json",
+      "format":{
+        "parse": {
+          "ctr": "number", 
+          "ci_lower": "number",
+          "ci_upper": "number",
+          "hr": "date:'%Y-%m-%d %H:%M:%S'"
+        }
+      }
+    }
+  ],
+ 
+  "scales": [
+    {
+      "range": "width",
+      "type": "time",
+      "name": "x",
+      "domain": {
+        "field": "hr",
+        "data": "table"
+      },
+      "nice":"hour"
+    },
+    {
+      "domain": {
+        "field": "ctr",
+        "data": "table"
+      },
+      "name": "y",
+      "zero": true,
+      "range": "height",
+      "type": "linear",
+      "nice": true
+    },
+    {
+      "name": "color",
+      "type": "ordinal",
+      "range": "category",
+      "domain": {"data": "table", "field": "branch"}
+    }
+  ],
+  
+  "axes": [
+    {
+      "scale": "x",
+      "orient": "bottom"
+    },
+    {
+      "scale": "y",
+      "orient": "left"
+    }
+  ],
+  
+  "legends": [
+    {
+      "orient": "right", 
+      "fill": "color", 
+      "offset": 50, 
+      "zindex": 1,
+      "title": "branch" 
+    }
+  ],
+
+  "marks": [
+    {
+      "type": "group",
+      "from": {
+        "facet": {
+          "name": "series",
+          "data": "table",  
+          "groupby": "branch"
+        }
+      },
+      "marks": [
+        {
+          "type": "area",
+          "from": {"data": "series"},
+          "encode": {
+            "enter": {
+              "interpolate": {"value": "monotone"},
+              "x": {"scale": "x", "field": "hr"},
+              "y": {"scale": "y", "field": "ci_lower"},
+              "y2": {"scale": "y", "field": "ci_upper"},
+              "fill": {"scale": "color", "field": "branch"},
+              "fillOpacity": {"value": 0.5}
+            }
+          }
+        },
+        {
+          "type": "line",
+          "from": {"data": "series"},
+          "encode": {
+            "enter": {
+              "interpolate": {"value": "monotone"},
+              "x": {"scale": "x", "field": "hr"},
+              "y": {"scale": "y", "field": "ctr"},
+              "stroke": {"scale": "color", "field": "branch"}
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

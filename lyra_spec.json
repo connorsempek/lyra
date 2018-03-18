@@ -1,0 +1,65 @@
+{
+  "$schema": "https://vega.github.io/schema/vega/v3.0.json",
+  "height": 400,
+  "padding": 5,
+  "width": 400,
+
+  "data": [
+    {
+      "name": "table",
+      "values": [
+        {"x": 0, "y": 0, "d": 10},
+        {"x": 2, "y": 1, "d": 6},
+        {"x": 1, "y": 5, "d": 2.5},
+        {"x": 3, "y": 6, "d": 4},
+        {"x": 5, "y": 8, "d": 30}
+      ]
+    }
+  ],
+ 
+  "scales": [
+    {
+      "name": "x",
+      "range": "width",
+      "type": "linear",
+      "domain": {
+        "field": "x",
+        "data": "table"
+      }
+    },
+    {
+      "name": "y",
+      "range": "height",
+      "type": "linear",
+      "domain": {
+        "field": "y",
+        "data": "table"
+      }
+    },
+    {
+      "name": "diameter",
+      "range": [0,1000],
+      "type": "linear",
+      "domain": {
+        "field": "d",
+        "data": "table"
+      }
+    }
+  ],
+
+
+  "marks": [
+    {
+      "type": "symbol",
+      "from": {"data": "table"},
+      "encode": {
+        "enter": {
+          "x": {"scale": "x", "field": "x"},
+          "y": {"scale": "y", "field": "y"},
+          "size": {"scale": "diameter", "field": "d"},
+          "fill": {"value": "black"}
+        }
+      }
+    }
+  ]
+}
