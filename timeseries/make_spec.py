@@ -2,7 +2,7 @@
 
 
 def data_obj(data, time_col, measure_col, fmt='%Y-%m-%d %H:%M:%S',
- group_col=None, lower_conf=None, upper_conf=None):
+  group_col=None, lower_conf=None, upper_conf=None):
   '''builds data object for spec
   '''
 
@@ -129,7 +129,7 @@ def marks_obj(time_col, measure_col, group_col=None, lower_conf=None, upper_conf
 
 
 def make_spec(data, time_col, measure_col, fmt='%Y-%m-%d %H:%M:%S',
- group_col=None, lower_conf=None, upper_conf=None, x_nice='hour', y_nice=True,
+  group_col=None, lower_conf=None, upper_conf=None, x_nice='hour', y_nice=True,
   y_zero=True, alpha=0.5):
   '''
   '''
