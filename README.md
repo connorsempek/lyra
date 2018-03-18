@@ -2,4 +2,4 @@
 
 A Python API for simple Vega plots.
 
-![lyra-constellation](lyra.png?raw=true =10x)
+<img src="lyra.png" alt="Lyra Constellation" style="width: 200px;"/>
